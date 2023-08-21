@@ -1,0 +1,142 @@
+<!--I declare that this code was written by me.
+I will not copy or allow others to copy my code.
+I understand that copyiny code is considered as plagiarism
+
+Student Name:[Gary Choa Kai Ze]
+Student ID:[22000993]
+Class[1D-E63C]
+Date/Time Last modified: [14/08/2023 9:53pm]-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Payment Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      background-image: url("paymentbg.jpg");
+    }
+
+    header {
+      background-color: #3498db;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: column;
+      width: 100%;
+      height: 100vh;
+    }
+
+    form {
+      width: 100%;
+      max-width: 400px;
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">Payment page</a></href></h1>
+  </header>
+  <div class="container">
+    <form id="payment-form">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" placeholder="Enter amount" required>
+
+      <label for="payment-method">Payment Method:</label>
+      <select id="payment-method" required>
+        <option value="" disabled selected>Select payment method</option>
+        <option value="creditdebit">Credit/Debit Card</option>
+        <option value="paypal">PayPal</option>
+        <option value="applepay">Apple Pay</option>
+        <option value="googlepay">Google Pay</option>
+      </select>
+
+      <label for="authentication-method">Authentication Method:</label>
+      <select id="authentication-method" required>
+        <option value="" disabled selected>Select authentication method</option>
+        <option value="fingerprint">Fingerprint</option>
+        <option value="facialrecognition">Facial Recognition</option>
+        <option value="passcode">Passcode</option>
+      </select>
+
+      <div id="passcode-section" style="display: none;">
+        <label for="passcode">Enter Passcode:</label>
+        <input type="password" id="passcode" placeholder="Enter passcode">
+      </div>
+
+      <button onclick="processPayment()">Process Payment</button>
+      
+    </form>
+  </div>
+
+  <script>
+    function processPayment() {
+      var amount = document.getElementById('amount').value;
+      var paymentMethod = document.getElementById('payment-method').value;
+      var authenticationMethod = document.getElementById('authentication-method').value;
+
+      if (authenticationMethod === 'passcode') {
+        var enteredPasscode = document.getElementById('passcode').value;
+        var predefinedPasscode = '0000';
+
+        if (enteredPasscode !== predefinedPasscode) {
+          alert('Incorrect passcode. Payment not processed.');
+          return;
+        }
+        setTimeout(function() {
+          window.location.href = "transaction.html"; 
+        }, 0);
+        return;
+      }
+      
+    }
+
+    document.getElementById('authentication-method').addEventListener('change', function() {
+      var passcodeSection = document.getElementById('passcode-section');
+      if (this.value === 'passcode') {
+        passcodeSection.style.display = 'block';
+      } else {
+        passcodeSection.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
